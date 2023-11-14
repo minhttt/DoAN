@@ -1,0 +1,284 @@
+﻿@using Ecommerce.Models;
+@model  IEnumerable<Ecommerce.Models.CartItem>
+@{
+    ViewBag.Title = "GetCartInfo";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<head>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .title {
+            margin-bottom: 5vh;
+        }
+
+        .card {
+            margin: auto;
+            max-width: 1200px;
+            width: 90%;
+            box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border-radius: 1rem;
+            border: transparent;
+            margin-bottom: 10%;
+        }
+
+        .cart {
+            background-color: #fff;
+            padding: 4vh 5vh;
+            border-bottom-left-radius: 1rem;
+            border-top-left-radius: 1rem;
+        }
+
+        .summary {
+            background-color: #ddd;
+            border-top-right-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+            padding: 4vh;
+            color: rgb(65, 65, 65);
+            height: 585px;
+        }
+
+            .summary .col-2 {
+                padding: 0;
+            }
+
+            .summary .col-10 {
+                padding: 0;
+            }
+
+        .row {
+            margin: 5px 0;
+        }
+
+        .title b {
+            font-size: 1.5rem;
+        }
+
+        .main {
+            margin: 0;
+            padding: 2vh 0;
+            width: 100%;
+        }
+
+        .col-2, .col {
+            padding: 0 1vh;
+        }
+
+        a {
+            padding: 0 1vh;
+        }
+
+        .close {
+            cursor: pointer;
+            margin-left: auto;
+            font-size: 0.7rem;
+        }
+
+        #hinh {
+            margin-left:27%;
+            width: 3.5rem;
+        }
+
+        .back-to-shop {
+            margin-top: 1.5rem;
+        }
+
+        h5 {
+            margin-top: 4vh;
+        }
+
+        hr {
+            margin-top: 1.25rem;
+        }
+
+        form {
+            padding: 2vh 0;
+        }
+
+        select {
+            border: 1px solid rgba(0, 0, 0, 0.137);
+            padding: 1.5vh 1vh;
+            margin-bottom: 4vh;
+            outline: none;
+            width: 100%;
+            background-color: rgb(247, 247, 247);
+        }
+
+        input {
+            border: 1px solid rgba(0, 0, 0, 0.137);
+            padding: 1vh;
+            margin-bottom: 1vh;
+            outline: none;
+            width: 90%;
+        }
+
+            input:focus::-webkit-input-placeholder {
+                color: transparent;
+            }
+
+        .btn1 {
+            background-color: #000;
+            border-color: #000;
+            color: white;
+            width: 100%;
+            font-size: 0.7rem;
+            margin-top: 4vh;
+            padding: 1vh;
+            border-radius: 0;
+        }
+
+            .btn1:focus {
+                box-shadow: none;
+                outline: none;
+                box-shadow: none;
+                color: white;
+                -webkit-box-shadow: none;
+                -webkit-user-select: none;
+                transition: none;
+            }
+
+            .btn1:hover {
+                color: white;
+            }
+
+        a {
+            color: black;
+        }
+
+            a:hover {
+                color: black;
+                text-decoration: none;
+            }
+
+        #code {
+            background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+            background-repeat: no-repeat;
+            background-position-x: 95%;
+            background-position-y: center;
+        }
+
+        #quantity {
+            padding: 1vh;
+            margin-bottom: 1vh;
+            outline: none;
+            width: 26%;
+            margin-right: 5px;
+        }
+
+        .name {
+            padding: 0 32px;
+        }
+
+        .logo2 {
+            padding: 0 96px;
+        }
+
+        .table-head {
+            text-align: center;
+            border-spacing: 20px;
+            border-right: 1px solid;
+            height: 134px;
+            overflow-y: auto;
+        }
+
+        .table-container {
+            height: 150px;
+            overflow-y: auto;
+        }
+
+        .item {
+            border-bottom: dashed;
+        }
+
+        .box-scroll {
+            height: 500px;
+            overflow-y: auto;
+            overflow-x:hidden;
+            width:113%;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="row">
+            <div class="col-md-7 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col"><h4><b>Giỏ hàng</b></h4></div>
+                        <div class="col align-self-center text-right text-muted">Mặt hàng</div>
+                    </div>
+                </div>
+                <div class="box-scroll">
+                    @foreach (var item in Model)
+                    {
+                        <div class="row border-top">
+                            <div class="row main align-items-center">
+                                <div class="col-2"><img class="img-fluid" id="hinh" src="~/Content/images/@item.ImagePro"></div>
+                                <div class="col">
+                                    <div class="row">@item.NamePro</div>
+                                </div>
+                                <div class="col">
+                                    <input type="number" class="quantity" value="@item.Number" />
+
+                                </div>
+                                <div class="col">@Html.DisplayFor(model => item.Price, "{0:N0} VND")<span class="close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" /></svg></span></div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Trở lại mua hàng</span></div>
+            </div>
+            <div class="col-md-5 summary">
+
+                <div class="logo2"><h4>THE COFFEE HOUSE</h4></div>
+                <hr />
+                <div><h5><b>Hóa đơn</b></h5></div>
+                <div class="bill">
+                    <div class="row-text">
+                        <div class="col">Khách hàng : @Session["Ten"]</div>
+                        <div class="col">Địa chỉ : 1168/78 Trường Sa</div>
+                        <div class="col">Ngày : 25/11/2023</div>
+                        <div class="col">Số điện thoại : 0345288218</div>
+
+                    </div>
+                </div>
+
+                <br />
+                <div class="table-container">
+                    <table cellspacing="0" class="table-head">
+
+                        <tr class="item">
+                            <th width="250">Tên sản phẩm</th>
+                            <th width="100">Số lượng</th>
+                            <th width="110">Đơn giá</th>
+                            <th width="110">Thành tiền</th>
+                        </tr>
+
+                        @foreach (var pro in Model)
+                        {
+                            <tr>
+                                <td>@pro.NamePro</td>
+                                <td class="name">@pro.Number</td>
+                                <td>@Html.DisplayFor(model => pro.Price, "{0:N0} VND")</td>
+                                <td></td>
+                            </tr>
+                        }
+
+                       
+                    </table>
+                </div>
+                <hr />
+               
+                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                    <div class="col">Tổng tiền</div>
+                    <div class="col text-right">
+                       210000
+                    </div>
+                </div>
+                <button class="btn1">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</body>
