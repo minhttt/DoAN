@@ -40,7 +40,7 @@
                     @Html.DisplayFor(modelItem => item.DecriptionPro)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Price)
+                    @string.Format("{0:N0} VND", item.Price)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ImagePro)
@@ -49,26 +49,69 @@
                     @Html.DisplayFor(modelItem => item.Category1.NameCate)
                 </td>
                 <td>
-                    @Html.ActionLink("Sửa", "Edit", new { id = item.ProductID }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Chi tiết", "Details", new { id = item.ProductID }, new { @class = "btn btn-primary chitiet-show" }) |
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        Xóa
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#SuaModal_@item.ProductID">
+                        Sửa
                     </button>
-                    <!--button delete-->
-                    <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+
+                    <!-- Modal Sửa -->
+                    <div class="modal fade" id="SuaModal_@item.ProductID" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="suaModalLabel" aria-hidden="true">
+                        <!-- Nội dung modal Sửa -->
+                    </div>
+                    <!--button chi tiet-->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ChiTietModal_@item.ProductID">
+                        Chi tiết
+                    </button>
+
+                    <!--Modal-->
+                    <!-- Scrollable modal -->
+                    <div class="modal fade" id="ChiTietModal_@item.ProductID" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                    <h5 class="modal-title" id="staticBackdropLabel">Chi Tiết</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    bạn muốn xóa ?
+                                    <div>
+                                        <h3 class="text-center title">Chi Tiết Sản Phẩm</h3>
+                                        <div>
+                                            Id Sản Phẩm: @Html.DisplayFor(model => item.ProductID)<br />
+                                            Tên: @item.NamePro <br />
+                                            Giá Tiền:@string.Format("{0:N0} VND", item.Price)
+                                            <img src="~/Content/images/@item.ImagePro" style="height:500px" />
+                                            Mô tả: @item.DecriptionPro
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--end-->
+                    <!--Button deelete-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop_@item.ProductID">
+                        Xóa
+                    </button>
+
+
+                    <!--button delete-->
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop_@item.ProductID" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Thong Bao</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    bạn muốn xóa sản phẩm @item.NamePro ?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                    <button type="button" class="btn btn-secondary delete-pro" data-bs-dismiss="modal" data-pro-id="@item.ProductID">Xoa</button>
+                                    <button type="button" class="btn btn-secondary delete-pro" data-bs-dismiss="modal" data-pro-id="@item.ProductID">Xóa</button>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +120,7 @@
 
                 </td>
             </tr>
-         }
+        }
     </table>
 </div>
 <script>

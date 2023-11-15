@@ -31,7 +31,7 @@
           <Property Name="PhoneCus" Type="nvarchar" MaxLength="15" />
           <Property Name="EmailCus" Type="nvarchar(max)" />
           <Property Name="PassCus" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="DiaChi" Type="nchar" MaxLength="50" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -60,7 +60,7 @@
           <Property Name="NamePro" Type="nvarchar(max)" />
           <Property Name="DecriptionPro" Type="nvarchar(max)" />
           <Property Name="Category" Type="nchar" MaxLength="20" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ImagePro" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK__OrderDeta__IDOrd__30F848ED">
@@ -167,7 +167,7 @@
           <Property Name="PhoneCus" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="EmailCus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PassCus" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="OrderProes" Relationship="Self.FK__OrderPro__IDCus__2D27B809" FromRole="Customer" ToRole="OrderPro" />
         </EntityType>
         <EntityType Name="OrderDetail">
@@ -201,7 +201,7 @@
           <Property Name="NamePro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DecriptionPro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Category" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ImagePro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Category1" Relationship="Self.FK_Pro_Category" FromRole="Products" ToRole="Category" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__IDPro__300424B4" FromRole="Products" ToRole="OrderDetail" />

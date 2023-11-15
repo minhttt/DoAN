@@ -87,7 +87,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#caphe" data-bs-toggle="collapse" class="nav-link px-0 align-middle" aria-expanded="false">
+                        <a href="#" data-bs-toggle="collapse" class="nav-link px-0 align-middle" aria-expanded="false">
                             <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Cà Phê</span>
                         </a>
                         <ul class="collapse show nav flex-column ms-1 collapse" id="caphe" data-bs-parent="#menu">
@@ -138,7 +138,7 @@
                                 <img src="~/Content/Images/@pro.ImagePro" width="200" class="img" />
                                 <div class="box-description">
                                     <a class="text"> @Html.ActionLink(pro.NamePro, "Details", new { id = pro.ProductID }, new { @class = "text" })</a>
-                                    <p class="price">@Html.DisplayFor(model => pro.Price, "{0:N0} VND")</p>
+                                    <p class="price">@string.Format("{0:N0} VND", pro.Price)</p>
                                 </div>
                             </div>
                         </div>
@@ -148,4 +148,6 @@
         </div>
     </div>
 </div>
+<br />
+<br />
 

@@ -7,7 +7,6 @@
 
 <head>
     <meta charset="utf-8" />
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         .title {
@@ -21,14 +20,16 @@
             box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             border-radius: 1rem;
             border: transparent;
-            margin-bottom: 10%;
+            margin-bottom: 10%; 
+            font-size:20px;
         }
 
         .cart {
             background-color: #fff;
-            padding: 4vh 5vh;
+            padding: 4vh 0vh;
             border-bottom-left-radius: 1rem;
-            border-top-left-radius: 1rem;
+            border-top-left-radius: 1rem; 
+            
         }
 
         .summary {
@@ -37,7 +38,7 @@
             border-bottom-right-radius: 1rem;
             padding: 4vh;
             color: rgb(65, 65, 65);
-            height: 585px;
+            height: 100%;
         }
 
             .summary .col-2 {
@@ -50,6 +51,22 @@
 
         .row {
             margin: 5px 0;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-text-size-adjust: none;
+            font-family: 'SF Pro Text', sans-serif;
+            line-height: 1.42857143;
+            color: #000;
+            font-weight: 400;
+            box-sizing: border-box;
+            border: 0;
+            font-size: 100%;
+           
+            outline: 0;
+            padding-bottom: 6%;
+            vertical-align: baseline;
+            margin-left: -15px;
+            margin-right: -15px;
+            margin-bottom:1%;
         }
 
         .title b {
@@ -58,7 +75,7 @@
 
         .main {
             margin: 0;
-            padding: 2vh 0;
+            padding: 2vh 6px;
             width: 100%;
         }
 
@@ -77,8 +94,8 @@
         }
 
         #hinh {
-            margin-left:27%;
-            width: 3.5rem;
+            margin-left:11%;
+            width: 5.5rem;
         }
 
         .back-to-shop {
@@ -197,6 +214,10 @@
             overflow-y: auto;
             overflow-x:hidden;
             width:113%;
+        } 
+        .img-fluid{
+            height:75px; 
+            width:75px;
         }
     </style>
 </head>
@@ -223,12 +244,43 @@
                                     <input type="number" class="quantity" value="@item.Number" />
 
                                 </div>
-                                <div class="col">@Html.DisplayFor(model => item.Price, "{0:N0} VND")<span class="close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" /></svg></span></div>
+                                <div class="col">
+                                    @string.Format("{0:N0} VND", item.Price)
+
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCart_@item.ProductID">
+                                        Xóa
+                                    </button>
+
+                                    <!--button delete-->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteCart_@item.ProductID" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">Thong Bao</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    bạn muốn xóa sản phẩm @item.NamePro ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                    <button type="button" class="btn btn-secondary delete-cart" data-bs-dismiss="modal" data-cart-id="@item.ProductID">Xóa</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end button delete-->
+                                    <!---->
+
+
+
+                                </div>
                             </div>
                         </div>
                     }
                 </div>
-                <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Trở lại mua hàng</span></div>
+                <div class="back-to-shop"><a href="@Url.Action("Index","Home")">&leftarrow;</a><span class="text-muted">Trở lại mua hàng</span></div>
             </div>
             <div class="col-md-5 summary">
 
@@ -238,9 +290,31 @@
                 <div class="bill">
                     <div class="row-text">
                         <div class="col">Khách hàng : @Session["Ten"]</div>
-                        <div class="col">Địa chỉ : 1168/78 Trường Sa</div>
-                        <div class="col">Ngày : 25/11/2023</div>
-                        <div class="col">Số điện thoại : 0345288218</div>
+                        <div class="col">
+                            Địa chỉ :
+                            @if (Session["Diachi"] == null)
+                            {
+
+                                <h3 style="color:red; font-size:13px; display:inline-block">Vui lòng nhập địa chỉ ở chi tiết khách hàng !</h3>
+                            }
+                            else
+                            {
+                                @Session["Diachi"];
+                            }
+                        </div>
+                        <div class="col">Ngày : @DateTime.Now.Date</div>
+                        <div class="col">
+                            Số điện thoại :
+                            @if (Session["SDT"] == null)
+                            {
+
+                                <h3 style="color:red; font-size:13px; display:inline-block">Vui lòng nhập SDT ở chi tiết khách hàng !</h3>
+                            }
+                            else
+                            {
+                                @Session["SDT"];
+                            }
+                        </div>
 
                     </div>
                 </div>
@@ -261,7 +335,7 @@
                             <tr>
                                 <td>@pro.NamePro</td>
                                 <td class="name">@pro.Number</td>
-                                <td>@Html.DisplayFor(model => pro.Price, "{0:N0} VND")</td>
+                                <td>@string.Format("{0:N0}", pro.Price)</td>
                                 <td></td>
                             </tr>
                         }
@@ -272,13 +346,33 @@
                 <hr />
                
                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+
                     <div class="col">Tổng tiền</div>
                     <div class="col text-right">
-                       210000
+                        @string.Format("{0:N0} VND", @ViewBag.TotalPrice) 
                     </div>
                 </div>
-                <button class="btn1">Xác nhận</button>
+                <button class="btn1 comfm">Xác nhận</button>
             </div>
         </div>
     </div>
 </body>
+<script>
+    $(document).ready(function () {
+        $('.delete-cart').click(function() {
+            var IDPro = $(this).data("cart-id");
+            $.ajax({
+                url: "@Url.Action("DeleteCart", "Cart")",
+                type: 'POST', // Or 'GET' based on your server-side implementation
+                data: { id: IDPro },
+                success: function (result) {
+                    toastr.success("xoa thanh cong");
+                    window.location.href = result.redirectTo;
+                },
+                error: function (error) {
+                    toastr.error("xoa khong thanh cong !");
+                }
+            });
+        });
+    })
+</script>

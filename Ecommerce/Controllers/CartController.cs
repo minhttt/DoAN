@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -61,8 +62,7 @@ namespace Ecommerce.Controllers
         public ActionResult GetCartInfo()
         {
             List<CartItem> myCart = GetCart();
-            if (myCart == null || myCart.Count == 0)
-                return RedirectToAction("Index", "Products");
+          
             ViewBag.TotalNumber = GetTotalNumber();
             ViewBag.TotalPrice = GetTotalPrice();
             return View(myCart);
@@ -74,5 +74,20 @@ namespace Ecommerce.Controllers
             ViewBag.TotalPrice = GetTotalPrice();
             return PartialView();
         }
+
+
+        [HttpPost]
+        public ActionResult DeleteCart(int id)
+        {
+            List<CartItem> myCar = GetCart();
+            var pro = myCar.Where(p => p.ProductID == id).FirstOrDefault();
+            if(pro != null)
+            {
+                myCar.Remove(pro);
+                
+            }
+            return Json(new { redirectTo = Url.Action("GetCartInfo") });
+        }
+
     }
 }

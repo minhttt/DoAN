@@ -59,15 +59,6 @@
         text-align: center;
     }
 
-    a:link, a:visited {
-        background-color: transparent;
-        color: black;
-        text-decoration: none;
-        display: inline-block;
-    }
-    a:hover, a:active {
-        color: darkorange;
-    }
 
     .add-to-cart-buy-now-btn {
         -webkit-text-size-adjust: none;
@@ -115,7 +106,7 @@
                     <div class="col-sm">
                         <h2>@Html.DisplayFor(model => model.NamePro)</h2>
                         <h4 style=" color: #e79439">
-                            @Html.DisplayFor(model => model.Price, "{0:N0} VNĐ")
+                            @string.Format("{0:N0} VND", Model.Price)
                         </h4>
                         <h5>Chọn size (Bắt buộc)</h5>
                         <div class="btn-group">
@@ -177,7 +168,7 @@
                                                 }
                                                 else
                                                 {
-                                                    <a href="@Url.Action("AddToCart", "Cart", new { id = Model.ProductID })" style="color:white;">Mua ngay</a>
+                                                    <a href="@Url.Action("AddToCart", "Cart", new { id = Model.ProductID })" style="color:white; text-decoration:none">Mua ngay</a>
                                                 }
 
                                                 </span>
@@ -211,7 +202,7 @@
     <br />
     <br />
     <br />
-    <div class="text.des" style="margin-left:240px;">
+    <div class="text.des" style="margin-left:120px;">
         <h1>
             <strong>
                 Mô tả sản phẩm
@@ -220,67 +211,12 @@
         <div class="text-container">
             @Html.DisplayFor(model => model.DecriptionPro)
             <hr />
-            <h2>
-                Sản phẩm liên quan
-            </h2>
+            <h2>Sản phẩm liên quan</h2>
         </div>
     </div>
 
     @Html.Action("Qcsanpham")
-    @*<table>
-            <td>
-                <div class="col" style=" margin-left: 240px; ">
-                    <a href="">
-                        <img class="lazyloaded" src="~/Images/cloudfeecaramel.jpg" />
-                        <div>
-                            Cloudfee Caramel
-                            <div>
-                                49.000đ
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </td>
-            <td>
-                <div class="col">
-                    <a href="">
-                        <img class="lazyloaded" src="~/Images/coldbrewsuatuoi.jpg" />
-                        <div>
-                            Cold Brew Sữa Tươi
-                            <div>
-                                49.000đ
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </td>
-            <td>
-                <div class="col">
-                    <a href="">
-                        <img class="lazyloaded" src="~/Images/caphedenda.jpg" />
-                        <div>
-                            Cà Phê Đen Đá
-                            <div>
-                                29.000đ
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </td>
-            <td>
-                <div class="col">
-                    <a href="">
-                        <img class="lazyloaded" src="~/Images/bacsiu.jpg" />
-                        <div>
-                            Bạc Sỉu
-                            <div>
-                                29.000đ
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </td>
-        </table>*@
+
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>

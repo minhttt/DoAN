@@ -29,9 +29,12 @@ namespace DoAn.Controllers
                     ModelState.AddModelError(string.Empty, "Email không được để trống");
                 if (string.IsNullOrEmpty(cust.PhoneCus))
                     ModelState.AddModelError(string.Empty, "Điện thoại không được để trống");
-             
+                if (string.IsNullOrEmpty(cust.DiaChi))
+                    ModelState.AddModelError(string.Empty, "Địa chỉ không được để trống");
                 if (ModelState.IsValid)
                 {
+                    Session["Diachi"] = cust.DiaChi;
+                    Session["SDT"] = cust.PhoneCus;
                     database.Customers.Add(cust);
                     database.SaveChanges();
                     return RedirectToAction("Login", "Users");
@@ -60,6 +63,7 @@ namespace DoAn.Controllers
                     var khachhang = database.Customers.FirstOrDefault(k => k.NameCus == cust.NameCus && k.PassCus == cust.PassCus);
                     if (khachhang != null)
                     {
+                        Session["Taikhoan"] = khachhang.IDCus;
                         Session["Ten"] = khachhang.NameCus;
                         return RedirectToAction("Index", "Home");
                     }
@@ -115,6 +119,53 @@ namespace DoAn.Controllers
         public ActionResult Gioithieu()
         {
             return View();
+        }
+
+        public ActionResult ViewProfile()
+        {
+            if (Session["Taikhoan"] != null)
+            {
+                using (DoAnEntities db = new DoAnEntities())
+                {
+                    int uId = Convert.ToInt32(Session["Taikhoan"].ToString());
+
+                    var UserDetails = db.Customers.Where(x => x.IDCus == uId).FirstOrDefault();
+                    if (UserDetails != null)
+                    {
+                        return View(UserDetails);
+                    }
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            Customer cus = database.Customers.FirstOrDefault(p => p.IDCus == id);
+            if (cus != null)
+                return View(cus);
+            else
+                return RedirectToAction("ViewProfile");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "IDCus,NameCus,PassCus,PhoneCus,DiaChi,EmailCus")] Customer cust)
+        {
+            if (ModelState.IsValid)
+            {
+                var custDB = database.Customers.FirstOrDefault(p => p.IDCus == cust.IDCus);
+                if (custDB != null)
+                {
+                    custDB.NameCus = cust.NameCus;
+                    custDB.EmailCus = cust.EmailCus;
+                    custDB.PhoneCus = cust.PhoneCus;
+                    custDB.PassCus = cust.PassCus;
+                    custDB.DiaChi = cust.DiaChi;
+                }
+                database.SaveChanges();
+                return RedirectToAction("ViewProfile");
+            }
+            return View(cust);
         }
 
     }

@@ -15,7 +15,7 @@
 </style>
 
 
-<table style="margin: 20px 20px 30px 240px;">
+<table style="margin: 20px 20px 30px 65px;">
     @foreach (var item in Model)
     {
         <td  >
@@ -25,7 +25,7 @@
                     <div>
                         @Html.ActionLink(item.NamePro, "Details", "Product", new { id = item.ProductID }, new { @class = "text" })
                         <div>
-                            @Html.DisplayFor(model => item.Price, "{0:N0} VND")
+                            @string.Format("{0:N0} VND", item.Price)
                         </div>
                     </div>
                 </a>

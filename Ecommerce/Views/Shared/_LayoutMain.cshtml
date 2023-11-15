@@ -132,7 +132,7 @@
             <li><a href="@Url.Action("PageCF","Product")">Cà phê</a></li>
             <li><a href="@Url.Action("PageTra","Product")">Trà</a></li>
             <li><a href="@Url.Action("Menu","Product")">Cửa Hàng</a></li>
-            <li><a href="/">Giới Thiệu</a></li>
+            <li><a href="@Url.Action("IndexIntro","Introduce")">Giới Thiệu</a></li>
             <li class="cart">
                 @Html.Action("CartPartial", "Cart")
             </li>
@@ -144,7 +144,7 @@
                 }
                 else
                 {
-                    <a style="margin-right:1em;">@Session["Ten"]</a>
+                    <a title="Thông tin khách hàng" href="@Url.Action("ViewProfile","Users")" style="margin-right:1em;">@Session["Ten"]</a>
 
                     <a class="button" style="right:0; position:absolute; margin-left:5px" href="@Url.Action("Logout","Users")">
 

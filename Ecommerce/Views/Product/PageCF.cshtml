@@ -62,7 +62,7 @@
                                 @Html.ActionLink(pro.NamePro, "Details", new { id = pro.ProductID } , new {@class = "text"})
 
                             </h3>
-                            <span style="color:#ccc">@Html.DisplayFor(model => pro.Price, "{0:N0} VND") </span>
+                            <span style="color:#ccc">@string.Format("{0:N0} VND", pro.Price) </span>
                         </div>
                     </div>
 

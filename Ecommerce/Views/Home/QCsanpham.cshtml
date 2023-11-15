@@ -29,7 +29,7 @@
                 <div class="card-home">
                     <img class="detail-image" src="~/Content/images/@item.ImagePro" alt="#" />
                     @Html.ActionLink(item.NamePro, "Details","Product", new { id = item.ProductID }, new { @class = "text" })
-                    <span style="color:#ccc">@Html.DisplayFor(model => item.Price, "{0:N0} VND")</span>
+                <span style="color:#ccc">@string.Format("{0:N0} VND", item.Price)</span>
                 </div>
             </div>
         }

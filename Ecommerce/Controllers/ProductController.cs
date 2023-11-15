@@ -50,7 +50,7 @@ namespace Ecommerce.Controllers
         public ActionResult Qcsanpham()
         {
             var sanpham = database.Products.ToList();
-            var sanphamRandom = sanpham.OrderBy(x => random.Next()).Take(4).ToList();
+            var sanphamRandom = sanpham.OrderBy(x => random.Next()).Take(7).ToList();
             return PartialView(sanphamRandom);
         }
 

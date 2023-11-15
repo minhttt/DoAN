@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Ecommerce.Controllers
 {
-    
+
     public class AdminController : Controller
     {
         DoAnEntities database = new DoAnEntities();
@@ -18,11 +18,10 @@ namespace Ecommerce.Controllers
         {
             if (Session["TenAD"] == null) return RedirectToAction("Error", "Users");
             var products = database.Products;
-           
-            return View(products.ToList());
-            
-        }
 
+            return View(products.ToList());
+
+        }
 
         // xu ly phan user
         public ActionResult qlUser()
@@ -31,9 +30,9 @@ namespace Ecommerce.Controllers
             return View(users);
         }
 
-      
 
-       
+
+
 
         [HttpPost]
         public ActionResult DeleteUser(int id)
@@ -43,7 +42,7 @@ namespace Ecommerce.Controllers
             {
                 database.Customers.Remove(cus);
                 database.SaveChanges();
-               
+
             }
 
             return Json(new { redirectTo = Url.Action("qlUser") });
@@ -117,7 +116,7 @@ namespace Ecommerce.Controllers
         public ActionResult DeleteProducts(int id)
         {
             Product pro = database.Products.Where(p => p.ProductID == id).FirstOrDefault();
-            if(pro != null)
+            if (pro != null)
             {
                 database.Products.Remove(pro);
                 database.SaveChanges();
